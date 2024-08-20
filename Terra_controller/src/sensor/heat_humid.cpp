@@ -1,7 +1,7 @@
-#include "sensor/heat_humid.h"
 #include "DHT.h"
+#include "common/config.h"
+#include "sensor/heat_humid.h"
 
-#define DHTPIN 2
 DHT dht(DHTPIN, DHT11);
 
 void HeatHumid::readHeatHumid(bool dht11)
@@ -12,13 +12,15 @@ void HeatHumid::readHeatHumid(bool dht11)
     dht.begin();
     temperature = dht.readTemperature();
     humidity = dht.readHumidity();
-
+    
+    // Handle the error: set default values, report error.
     if (isnan(temperature) || isnan(humidity)) {
-        // Handle the error: set default values, report error, etc.
         Serial.write("Failed to read from DHT sensor!\n");
         temperature = 0.0;
         humidity = 0.0;
     }
+    else
+        displayHeatHumid();
 }
 
 void HeatHumid::displayHeatHumid()

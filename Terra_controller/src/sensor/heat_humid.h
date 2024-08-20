@@ -1,5 +1,5 @@
-#ifndef HEAT_HUMID
-#define HEAT_HUMID
+#ifndef HEAT_HUMID_H
+#define HEAT_HUMID_H
 struct HeatHumid
 {
     float temperature;
@@ -22,11 +22,11 @@ struct HeatHumid
     /*
      * Function: displayHeatHumid
      * --------------------------
-     * Print temperature and humidity
+     * Print temperature and humidity values
      *
      * returns: The function does not return any values (void)
      */
     void displayHeatHumid();
 };
 
-#endif // HEAT_HUMID
+#endif // HEAT_HUMID_H
