@@ -2,12 +2,12 @@
 #include "common/config.h"
 #include "sensor/heat_humid.h"
 
-DHT dht(DHTPIN, DHT11);
+DHT dht(DHT_SENSOR_PIN, DHT11);
 
 void HeatHumid::readHeatHumid(bool dht11)
 {
     if(dht11 == false)
-        dht = DHT(DHTPIN,DHT22);
+        dht = DHT(DHT_SENSOR_PIN,DHT22);
     
     dht.begin();
     temperature = dht.readTemperature();

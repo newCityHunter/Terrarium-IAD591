@@ -4,7 +4,7 @@
 
 void SoilMoisture::readSoilMoisture()
 {
-    moisture = analogRead(SOILMOISTUREPIN);
+    moisture = analogRead(SOIL_MOISTURE_PIN);
 }
 
 void SoilMoisture::displaySoilMoisture()
