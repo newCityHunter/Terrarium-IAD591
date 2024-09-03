@@ -18,4 +18,6 @@ const int LED_RED_PIN = 11;
 const int LED_GREEN_PIN = 10;
 const int LED_BLUE_PIN = 9;
 
+const int WATER_DETECTION_PIN = 7;
+
 #endif // CONFIG_H
