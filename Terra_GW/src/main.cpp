@@ -9,7 +9,7 @@ unsigned long currentMillis;
 const String postDevice = ".PostDevice";
 const String putPerformance = ".PutDetailPerformance";
 
-WiFiClient espClient;
+WiFiClientSecure espClient;
 PubSubClient client(espClient); // Declare the PubSubClient instance
 // config RX and TX serial
 #define RXp2 16
@@ -24,8 +24,6 @@ void setup()
   setupWifi();
   setupMqtt();
   client.subscribe(getReceiveTopic().c_str());
-  client.subscribe(getSendTopic(putPerformance).c_str());
-  client.subscribe(getSendTopic(postDevice).c_str());
   delay(2000);
   // Call postDeviceApi to get id
   String correlationId = generateCorrelation("PostDevice");

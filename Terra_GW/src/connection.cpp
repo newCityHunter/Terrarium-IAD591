@@ -12,14 +12,14 @@ const int mqtt_buffer_size = RABBIT_BUFFER_SIZE;
 
 // Topic to send messages
 const String exchange_send = "gateway.";
-const String device_name = "device_name";
+const String device_name = WiFi.macAddress();
 
 unsigned int correlationIndex;
 char *deviceID;
 String correlationIds[CORRELATION_ID_MAX_SIZE];
 
 // Topic to receive from server
-const String exchange_received = "server.*";
+const String exchange_received = "server.";
 
 std::map<std::string, int> methodMap = {{"PostDevice", 1}};
 
@@ -66,7 +66,7 @@ String getSendTopic(String functionName)
 
 String getReceiveTopic()
 {
-    return exchange_received;
+    return exchange_received + device_name;
 }
 
 String getDeviceName()
@@ -82,7 +82,7 @@ String getResponseMethod(String response)
 void handleMessageReceived(String topic, const char *receiveMessage)
 {
     Serial.printf("Handle message with topic is %s\n", topic.c_str());
-    if ((String)topic == "server/+")
+    if ((String)topic == "server/" + device_name)
     {
         String responseMethod;
         for (String correlationId : correlationIds)

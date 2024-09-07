@@ -1,5 +1,8 @@
-#include <WiFi.h>
+#include <WiFiClientSecure.h>
+#include <esp-tls-crypto/esp_tls_crypto.h>
 
-extern WiFiClient espClient;
+extern WiFiClientSecure espClient;
 
 void setupWifi();
+void setupTSL();
+
