@@ -4,12 +4,15 @@
 
 DHT dht(DHT_SENSOR_PIN, DHT11);
 
-void HeatHumid::readHeatHumid(bool dht11)
+void HeatHumid::begin(bool dht11)
 {
-    if(dht11 == false)
-        dht = DHT(DHT_SENSOR_PIN,DHT22);
-    
+    if (dht11 == false)
+        dht = DHT(DHT_SENSOR_PIN, DHT22);
     dht.begin();
+}
+
+void HeatHumid::readHeatHumid()
+{
     temperature = dht.readTemperature();
     humidity = dht.readHumidity();
     
@@ -19,12 +22,14 @@ void HeatHumid::readHeatHumid(bool dht11)
         temperature = 0.0;
         humidity = 0.0;
     }
-    else
-        displayHeatHumid();
 }
 
 void HeatHumid::displayHeatHumid()
 {
-    Serial.write("Tempurature: %f*C\n",temperature);
-    Serial.write("Humidity: %f%\n",humidity);
+    Serial.print("Tempurature: ");
+    Serial.print(temperature);
+    Serial.println("*C");
+    Serial.print("Humidity: ");
+    Serial.print(humidity);
+    Serial.println("%");
 }

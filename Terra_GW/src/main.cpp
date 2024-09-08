@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "wifi.h"
+#include "wifiConnection.h"
 #include "connection.h"
 
 const unsigned long interval = 10000; // 10 seconds (in milliseconds)

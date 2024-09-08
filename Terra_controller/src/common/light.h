@@ -10,6 +10,20 @@
 struct Light
 {
     /*!
+     * @brief Holds the current intensity of the red, green, and blue channels.
+     *
+     * These values represent the current color state of the LED.
+     */
+    int red;    /*!< Current red intensity (0-255) */
+    int green;  /*!< Current green intensity (0-255) */
+    int blue;   /*!< Current blue intensity (0-255) */
+
+    /*!
+     * @brief Constructor to initialize the light with the LED off.
+     */
+    Light() : red(0), green(0), blue(0) {}
+
+    /*!
      * @brief Sets the color of an RGB LED.
      *
      * This function controls the color of an RGB LED by setting the intensity of the red, green, and blue channels.
