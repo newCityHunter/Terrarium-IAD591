@@ -1,19 +1,24 @@
-#include "water_detection.h"
 #include <Arduino.h>
+#include "common/config.h"
+#include "sensor/water_detection.h"
 
-// Constructor: initializes the pin for the water detection sensor
-WaterDetection::WaterDetection(int pin) {
-    sensorPin = pin;
-    pinMode(sensorPin, INPUT);
+void WaterDetection::readWaterDetection()
+{
+    // Read the value from the water detection sensor.
+    int sensorValue = digitalRead(WATER_DETECTION_PIN);
+    
+    // Update the waterDetected status based on sensor reading
+    waterDetected = (sensorValue == HIGH); // Assuming HIGH means water is detected
 }
 
-// Destructor: does nothing specific in this case
-WaterDetection::~WaterDetection() {
-    // No resources to clean up
-}
-
-// Method to check if water is detected
-bool WaterDetection::isWaterDetected() {
-    int sensorValue = digitalRead(sensorPin);
-    return sensorValue == HIGH; // Assume HIGH means water is detected
+void WaterDetection::displayWaterDetection()
+{
+    if (waterDetected)
+    {
+        Serial.println("Water Detected: Yes");
+    }
+    else
+    {
+        Serial.println("Water Detected: No");
+    }
 }

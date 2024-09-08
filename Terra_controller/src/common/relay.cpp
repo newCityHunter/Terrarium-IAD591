@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include "common/relay.h"
 #include "sensor/heat_humid.h"
+#include "sensor/soil_moisture.h"
 
 void Relay::setRelayName(const char name[10])
 {
@@ -14,23 +15,23 @@ void Relay::relayControl()
     {
     case HUMIDITY:
         extern HeatHumid heathumid;
-        if (condition.humidThreshold < heathumid.humidity)
+        if (condition.humidThreshold[1] < heathumid.humidity)
             closeRelay();
-        else
+        else if (condition.humidThreshold[0] > heathumid.humidity)
             openRelay();
         break;
     case WATER:
-        float moistrue;
-        if (condition.moistureThreshold < moistrue)
+        extern SoilMoisture soilMoisture;
+        if (condition.moistureThreshold[1] < soilMoisture.moisture)
             closeRelay();
-        else
+        else if (condition.moistureThreshold[0] > soilMoisture.moisture)
             openRelay();
         break;
     case TEMPERATURE:
-        float temperature;
-        if (condition.temperatureThreshold > temperature)
+        extern HeatHumid heathumid;
+        if (condition.temperatureThreshold[1] > heathumid.temperature)
             closeRelay();
-        else
+        else if (condition.temperatureThreshold[0] < heathumid.temperature)
             openRelay();
         break;
     case TIME_BASED:
@@ -49,6 +50,7 @@ void Relay::relayControl()
 
 void Relay::closeRelay()
 {
+    state = false;
     digitalWrite(signalPin, HIGH);
     Serial.print("Relay ");
     Serial.print(relayName);
@@ -57,6 +59,7 @@ void Relay::closeRelay()
 
 void Relay::openRelay()
 {
+    state = true;
     digitalWrite(signalPin, LOW);
     Serial.print("Relay ");
     Serial.print(relayName);

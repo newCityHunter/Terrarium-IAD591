@@ -11,7 +11,7 @@
  */
 struct Relay
 {
-
+    bool state;/// true is ON false is OFF
     char relayName[10]; ///< The name of the relay (null-terminated string with a maximum length of 9 characters).
     int signalPin;      ///< The pin number used to control the relay.
     Condition condition;
