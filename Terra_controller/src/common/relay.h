@@ -2,6 +2,10 @@
 #define RELAY_H
 
 #include "common/condition.h"
+
+extern HeatHumid heathumid;
+extern SoilMoisture soilMoisture;
+extern HeatHumid heathumid;
 /*!
  * @struct Relay
  * @brief Represents a relay with control and identification functionalities.

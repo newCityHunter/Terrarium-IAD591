@@ -64,14 +64,19 @@ void setup()
 
 void loop()
 {
-    // light.setColor(255,255,255);
-    // delay(1000);
-    // light.setColor(255,0,255);
-    // delay(1000);
     unsigned long currentMillis = millis();
 
     if (currentMillis - lastCheckTime >= checkInterval){
         
+        heatHumid.readHeatHumid();
+        soilMoisture.readSoilMoisture();
+        waterDetection.readWaterDetection();
+
+        pumpRelay.relayControl();
+        valveRelay.relayControl();
+        lightRelay.relayControl();
+        peltierRelay.relayControl();
+
         // Thu thập dữ liệu từ các cảm biến và relay
         String jsonData = collectData();
         // Gửi dữ liệu đã thu thập được qua Serial

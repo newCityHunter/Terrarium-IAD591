@@ -8,6 +8,16 @@
 #include "./sensor/water_detection.h"
 #include "./relay.h"
 #include "./light.h"
+    
+extern Relay pumpRelay;
+extern Relay valveRelay;
+extern Relay lightRelay;
+extern Relay peltierRelay;
+extern HeatHumid heatHumid;
+extern SoilMoisture soilMoisture;
+extern WaterDetection waterDetection;
+extern Light light;
+
 
 /*!
  * @struct StatusManager
