@@ -1,4 +1,4 @@
-#include "wifi.h"
+#include "wifiConnection.h"
 
 const char *ssid = WIFI_NAME_SSID;
 const char *password = WIFI_PASSWORD;
