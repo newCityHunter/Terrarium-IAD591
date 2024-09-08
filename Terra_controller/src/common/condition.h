@@ -23,8 +23,8 @@ typedef struct {
     float humidThreshold[2];        // Ngưỡng độ ẩm (0: bật, 1: tắt)
     float temperatureThreshold[2];  // Ngưỡng nhiệt độ (0: bật, 1: tắt)
     float moistureThreshold[2];     // Ngưỡng độ ẩm đất (0: bật, 1: tắt)
-    int duration;                   // Thời gian (tính bằng phút)
-    int startTime;                  // Thời gian bắt đầu theo định dạng HHMM
+    unsigned long duration;                   // Thời gian (tính bằng phút)
+    unsigned long startTime;                  // Thời gian bắt đầu theo định dạng HHMM
 
     void initHumidityCondition(float upper, float lower);
     // Khởi tạo cấu trúc Condition cho điều kiện nhiệt độ

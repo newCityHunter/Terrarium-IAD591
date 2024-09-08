@@ -14,21 +14,21 @@ void Relay::relayControl()
     switch (this->condition.type)
     {
     case HUMIDITY:
-        
+        extern HeatHumid heathumid;
         if (condition.humidThreshold[1] < heathumid.humidity)
             closeRelay();
         else if (condition.humidThreshold[0] > heathumid.humidity)
             openRelay();
         break;
     case WATER:
-        
+        extern SoilMoisture soilMoisture;
         if (condition.moistureThreshold[1] < soilMoisture.moisture)
             closeRelay();
         else if (condition.moistureThreshold[0] > soilMoisture.moisture)
             openRelay();
         break;
     case TEMPERATURE:
-        
+        extern HeatHumid heathumid;
         if (condition.temperatureThreshold[1] > heathumid.temperature)
             closeRelay();
         else if (condition.temperatureThreshold[0] < heathumid.temperature)
