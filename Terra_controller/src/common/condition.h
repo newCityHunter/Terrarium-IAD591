@@ -25,33 +25,33 @@ typedef struct {
     float moistureThreshold[2];     // Ngưỡng độ ẩm đất (0: bật, 1: tắt)
     int duration;                   // Thời gian (tính bằng phút)
     int startTime;                  // Thời gian bắt đầu theo định dạng HHMM
+
+    void initHumidityCondition(float upper, float lower);
+    // Khởi tạo cấu trúc Condition cho điều kiện nhiệt độ
+    void initTemperatureCondition(float upper, float lower);
+
+    // Khởi tạo cấu trúc Condition cho điều kiện độ ẩm đất
+    void initMoistureCondition(float upper, float lower);
+
+    // Khởi tạo cấu trúc Condition cho điều kiện dựa trên thời gian
+    void initTimeBasedCondition(int duration, int startTime);
+
+    // Kiểm tra điều kiện có thỏa mãn hay không
+    int isConditionMet(float currentHumidity, float currentTemperature, float currentMoisture, int currentTime);
+
+    // Cập nhật ngưỡng độ ẩm
+    void updateHumidityThreshold(float upper, float lower);
+
+    // Cập nhật ngưỡng nhiệt độ
+    void updateTemperatureThreshold(float upper, float lower);
+
+    // Cập nhật ngưỡng độ ẩm đất
+    void updateMoistureThreshold(float upper, float lower);
+
+    // Cập nhật thời gian cho điều kiện dựa trên thời gian
+    void updateTimeCondition(int duration, int startTime);
 } Condition;
 
-// Khởi tạo cấu trúc Condition cho điều kiện độ ẩm
-void initHumidityCondition(Condition *condition, float upper, float lower);
 
-// Khởi tạo cấu trúc Condition cho điều kiện nhiệt độ
-void initTemperatureCondition(Condition *condition, float upper, float lower);
-
-// Khởi tạo cấu trúc Condition cho điều kiện độ ẩm đất
-void initMoistureCondition(Condition *condition, float upper, float lower);
-
-// Khởi tạo cấu trúc Condition cho điều kiện dựa trên thời gian
-void initTimeBasedCondition(Condition *condition, int duration, int startTime);
-
-// Kiểm tra điều kiện có thỏa mãn hay không
-int isConditionMet(Condition *condition, float currentHumidity, float currentTemperature, float currentMoisture, int currentTime);
-
-// Cập nhật ngưỡng độ ẩm
-void updateHumidityThreshold(Condition *condition, float upper, float lower);
-
-// Cập nhật ngưỡng nhiệt độ
-void updateTemperatureThreshold(Condition *condition, float upper, float lower);
-
-// Cập nhật ngưỡng độ ẩm đất
-void updateMoistureThreshold(Condition *condition, float upper, float lower);
-
-// Cập nhật thời gian cho điều kiện dựa trên thời gian
-void updateTimeCondition(Condition *condition, int duration, int startTime);
 
 #endif // CONDITION_H

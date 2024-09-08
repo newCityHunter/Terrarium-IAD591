@@ -30,15 +30,19 @@ void setup()
 {
     pumpRelay.setRelayName("Pump");
     pumpRelay.signalPin = RELAY_PUMP_PIN;
+    pumpRelay.condition.initMoistureCondition(0.7,0.15);
 
     valveRelay.setRelayName("Valve");
     valveRelay.signalPin = RELAY_VALVE_PIN;
+    valveRelay.condition.initMoistureCondition(0.7,0.15);
 
     lightRelay.setRelayName("Light");
     lightRelay.signalPin = RELAY_LIGHT_PIN;
+    lightRelay.condition.initTimeBasedCondition(14400, 18000); // 4 tiếng từ 5h sáng
 
     peltierRelay.setRelayName("Peltier");
     peltierRelay.signalPin = RELAY_PELTIER_PIN;
+    peltierRelay.condition.initTemperatureCondition(40,27);
 
     // relay pin mode
     pinMode(pumpRelay.signalPin, OUTPUT);
@@ -69,9 +73,9 @@ void loop()
     if (currentMillis - lastCheckTime >= checkInterval){
         
         // Thu thập dữ liệu từ các cảm biến và relay
-        String jsonData = statusManager.collectData();
+        String jsonData = collectData();
         // Gửi dữ liệu đã thu thập được qua Serial
-        statusManager.sendDataOverSerial(jsonData);
+        sendDataOverSerial(&jsonData);
 
         lastCheckTime = currentMillis;
     }

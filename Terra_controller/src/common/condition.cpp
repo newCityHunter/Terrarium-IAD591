@@ -1,50 +1,50 @@
 #include "condition.h"
 
 // Khởi tạo điều kiện độ ẩm
-void initHumidityCondition(Condition *condition, float upper, float lower) {
-    condition->type = HUMIDITY;
-    condition->humidThreshold[0] = upper;
-    condition->humidThreshold[1] = lower;
+void Condition:: initHumidityCondition(float upper, float lower) {
+    type = HUMIDITY;
+    humidThreshold[0] = upper;
+    humidThreshold[1] = lower;
 }
 
 // Khởi tạo điều kiện nhiệt độ
-void initTemperatureCondition(Condition *condition, float upper, float lower) {
-    condition->type = TEMPERATURE;
-    condition->temperatureThreshold[0] = upper;
-    condition->temperatureThreshold[1] = lower;
+void Condition:: initTemperatureCondition(float upper, float lower) {
+    type = TEMPERATURE;
+    temperatureThreshold[0] = upper;
+    temperatureThreshold[1] = lower;
 }
 
 // Khởi tạo điều kiện độ ẩm đất
-void initMoistureCondition(Condition *condition, float upper, float lower) {
-    condition->type = WATER;
-    condition->moistureThreshold[0] = upper;
-    condition->moistureThreshold[1] = lower;
+void Condition:: initMoistureCondition(float upper, float lower) {
+    type = WATER;
+    moistureThreshold[0] = upper;
+    moistureThreshold[1] = lower;
 }
 
 // Khởi tạo điều kiện dựa trên thời gian
-void initTimeBasedCondition(Condition *condition, int duration, int startTime) {
-    condition->type = TIME_BASED;
-    condition->duration = duration;
-    condition->startTime = startTime;
+void Condition:: initTimeBasedCondition(int duration, int startTime) {
+    type = TIME_BASED;
+    duration = duration;
+    startTime = startTime;
 }
 
 
 // Cập nhật ngưỡng độ ẩm
-void updateHumidityThreshold(Condition *condition, float upper, float lower) {
-    condition->humidThreshold[0] = upper;
-    condition->humidThreshold[1] = lower;
+void Condition:: updateHumidityThreshold(float upper, float lower) {
+    humidThreshold[0] = upper;
+    humidThreshold[1] = lower;
 }
 
 // Cập nhật ngưỡng nhiệt độ
-void updateTemperatureThreshold(Condition *condition, float upper, float lower) {
-    condition->temperatureThreshold[0] = upper;
-    condition->temperatureThreshold[1] = lower;
+void Condition:: updateTemperatureThreshold(float upper, float lower) {
+    temperatureThreshold[0] = upper;
+    temperatureThreshold[1] = lower;
 }
 
 // Cập nhật ngưỡng độ ẩm đất
-void updateMoistureThreshold(Condition *condition, float upper, float lower) {
-    condition->moistureThreshold[0] = upper;
-    condition->moistureThreshold[1] = lower;
+void Condition:: updateMoistureThreshold(float upper, float lower) {
+    moistureThreshold[0] = upper;
+    moistureThreshold[1] = lower;
 }
 
 
