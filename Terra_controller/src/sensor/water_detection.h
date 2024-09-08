@@ -1,3 +1,4 @@
+#include "sensor.h"
 #ifndef WATER_DETECTION_H
 #define WATER_DETECTION_H
 
@@ -8,14 +9,12 @@
  * This `struct` provides methods to read water detection data from a sensor and display
  * the current detection status.
  */
-struct WaterDetection
+struct WaterDetection : public Sensor
 {
-    bool waterDetected; ///< The current water detection status from the sensor.
-
     /*!
      * @brief Reads data from the water detection sensor.
      *
-     * This function reads the water detection status from the sensor and updates the 
+     * This function reads the water detection status from the sensor and updates the
      * `waterDetected` member variable with the current status.
      *
      * @return void

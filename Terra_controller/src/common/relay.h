@@ -2,6 +2,9 @@
 #define RELAY_H
 
 #include "common/condition.h"
+#include "sensor/heat_humid.h"
+#include "sensor/soil_moisture.h"
+#include "sensor/water_detection.h"
 
 /*!
  * @struct Relay
@@ -10,9 +13,11 @@
  * This `struct` provides methods to set the relay's name and control its state
  * by opening and closing the relay circuit.
  */
-struct Relay
+union Relay
 {
-    bool state;/// true is ON false is OFF
+    Sensor sensor;
+
+    bool state;         /// true is ON false is OFF
     char relayName[10]; ///< The name of the relay (null-terminated string with a maximum length of 9 characters).
     int signalPin;      ///< The pin number used to control the relay.
     Condition condition;
@@ -35,7 +40,7 @@ struct Relay
      *
      * This function control the relay circuit on condition, each relay has it
      * on condition based on condition type
-     * 
+     *
      * @return void
      * This function does not return a value.
      */
@@ -62,6 +67,8 @@ struct Relay
      * This function does not return a value.
      */
     void openRelay();
+
+    void setSensor(Sensor &s);
 };
 
 #endif // RELAY_H

@@ -9,32 +9,41 @@ void Relay::setRelayName(const char name[10])
     relayName[sizeof(relayName) - 1] = '\0'; // Ensure null-termination
 }
 
+void Relay::setSensor(Sensor &s)
+{
+    this->sensor = s;
+}
+
 void Relay::relayControl()
 {
     switch (this->condition.type)
     {
     case HUMIDITY:
-        extern HeatHumid heathumid;
-        if (condition.humidThreshold[1] < heathumid.humidity)
+    {
+        if (condition.humidThreshold[1] < sensor.humidity)
             closeRelay();
-        else if (condition.humidThreshold[0] > heathumid.humidity)
+        else if (condition.humidThreshold[0] > sensor.humidity)
             openRelay();
         break;
+    }
     case WATER:
-        extern SoilMoisture soilMoisture;
-        if (condition.moistureThreshold[1] < soilMoisture.moisture)
+    {
+        if (sensor.waterDetected)
             closeRelay();
-        else if (condition.moistureThreshold[0] > soilMoisture.moisture)
+        else
             openRelay();
         break;
+    }
     case TEMPERATURE:
-        extern HeatHumid heathumid;
-        if (condition.temperatureThreshold[1] > heathumid.temperature)
+    {
+        if (condition.temperatureThreshold[1] > sensor.temperature)
             closeRelay();
-        else if (condition.temperatureThreshold[0] < heathumid.temperature)
+        else if (condition.temperatureThreshold[0] < sensor.temperature)
             openRelay();
         break;
+    }
     case TIME_BASED:
+    {
         unsigned long currentTime = millis() / 60000;
 
         if (currentTime < condition.startTime || currentTime > (condition.startTime + condition.duration))
@@ -42,9 +51,12 @@ void Relay::relayControl()
         else
             openRelay();
         break;
+    }
     default:
+    {
         openRelay();
         break;
+    }
     }
 }
 

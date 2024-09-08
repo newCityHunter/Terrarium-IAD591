@@ -8,7 +8,7 @@
 #include "./sensor/water_detection.h"
 #include "./relay.h"
 #include "./light.h"
-    
+
 extern Relay pumpRelay;
 extern Relay valveRelay;
 extern Relay lightRelay;
@@ -18,20 +18,7 @@ extern SoilMoisture soilMoisture;
 extern WaterDetection waterDetection;
 extern Light light;
 
-
-/*!
- * @struct StatusManager
- * @brief Manages the collection and transmission of sensor data and control variables.
- *
- * The `StatusManager` struct is responsible for collecting data from various sensors
- * and relays, sending the data as JSON over Serial, and managing control variables
- * like temperature and humidity thresholds.
- */
-typedef struct {
-
-} StatusManager;
-
-
+void setupRelay();
 /*!
  * @brief Collects data from the provided sensors and relays.
  *
@@ -51,6 +38,8 @@ String collectData();
  * @param jsonData A pointer to the JSON string to be sent.
  * @return void
  */
-void sendDataOverSerial(const String* jsonData);
+void sendDataOverSerial(String jsonData);
+
+void handleRequest(String request);
 
 #endif // STATUS_MANAGER_H

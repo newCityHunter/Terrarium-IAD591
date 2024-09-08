@@ -1,3 +1,5 @@
+#include "sensor.h"
+
 #ifndef SOIL_MOISTURE_H
 #define SOIL_MOISTURE_H
 
@@ -8,14 +10,12 @@
  * This `struct` provides methods to read soil moisture data from a sensor and display
  * the current moisture level.
  */
-struct SoilMoisture
+struct SoilMoisture : public Sensor
 {
-    float moisture; ///< The current soil moisture reading from the sensor.
-
     /*!
      * @brief Reads data from the soil moisture sensor.
      *
-     * This function reads the soil moisture level from the sensor and updates the 
+     * This function reads the soil moisture level from the sensor and updates the
      * `moisture` member variable with the current reading.
      *
      * @return void
@@ -26,7 +26,7 @@ struct SoilMoisture
     /*!
      * @brief Prints the soil moisture value.
      *
-     * This function displays the current soil moisture reading on the console or a 
+     * This function displays the current soil moisture reading on the console or a
      * connected display.
      *
      * @return void

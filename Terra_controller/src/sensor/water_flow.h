@@ -1,3 +1,4 @@
+#include "sensor.h"
 #ifndef WaterFlow_H
 #define WaterFlow_H
 
@@ -9,13 +10,8 @@
  * and check if water is currently flowing through the sensor. It stores relevant
  * sensor data, such as the pulse count and total water volume.
  */
-struct WaterFlow
+struct WaterFlow : public Sensor
 {
-    int sensorPin;               ///< The pin connected to the water flow sensor signal.
-    float calibrationFactor;      ///< Calibration factor to convert pulse count to flow rate (pulses per liter).
-    volatile int pulseCount;      ///< The number of pulses counted by the sensor.
-    bool isAvailable;             ///< Flag indicating whether water is flowing (true) or not (false).
-
     /*!
      * @brief Initializes the water flow sensor.
      *

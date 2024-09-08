@@ -1,3 +1,5 @@
+#include "sensor.h"
+
 #ifndef HEAT_HUMID_H
 #define HEAT_HUMID_H
 
@@ -8,11 +10,8 @@
  * This `struct` provides methods to read data from a DHT sensor and display
  * the current temperature and humidity readings.
  */
-struct HeatHumid
+struct HeatHumid : public Sensor
 {
-    float temperature; ///< The current temperature reading from the sensor.
-    float humidity;    ///< The current humidity reading from the sensor.
-
     /**
      * @brief Initializes the DHT sensor with the specified type.
      *

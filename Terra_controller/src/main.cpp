@@ -19,31 +19,16 @@ Relay pumpRelay;
 Relay valveRelay;
 Relay lightRelay;
 Relay peltierRelay;
+
 HeatHumid heatHumid;
 SoilMoisture soilMoisture;
 WaterDetection waterDetection;
-Light light;
-StatusManager statusManager;
 
+Light light;
 
 void setup()
 {
-    pumpRelay.setRelayName("Pump");
-    pumpRelay.signalPin = RELAY_PUMP_PIN;
-    pumpRelay.condition.initMoistureCondition(0.7,0.15);
-
-    valveRelay.setRelayName("Valve");
-    valveRelay.signalPin = RELAY_VALVE_PIN;
-    valveRelay.condition.initMoistureCondition(0.7,0.15);
-
-    lightRelay.setRelayName("Light");
-    lightRelay.signalPin = RELAY_LIGHT_PIN;
-    lightRelay.condition.initTimeBasedCondition(14400, 18000); // 4 tiếng từ 5h sáng
-
-    peltierRelay.setRelayName("Peltier");
-    peltierRelay.signalPin = RELAY_PELTIER_PIN;
-    peltierRelay.condition.initTemperatureCondition(40,27);
-
+    setupRelay();
     // relay pin mode
     pinMode(pumpRelay.signalPin, OUTPUT);
     pinMode(valveRelay.signalPin, OUTPUT);
@@ -59,15 +44,16 @@ void setup()
     pinMode(SOIL_MOISTURE_PIN, INPUT);
     pinMode(DHT_SENSOR_PIN, INPUT);
 
-    
+    Serial.begin(9600);
 }
 
 void loop()
 {
     unsigned long currentMillis = millis();
 
-    if (currentMillis - lastCheckTime >= checkInterval){
-        
+    if (currentMillis - lastCheckTime >= checkInterval)
+    {
+
         heatHumid.readHeatHumid();
         soilMoisture.readSoilMoisture();
         waterDetection.readWaterDetection();
@@ -80,10 +66,14 @@ void loop()
         // Thu thập dữ liệu từ các cảm biến và relay
         String jsonData = collectData();
         // Gửi dữ liệu đã thu thập được qua Serial
-        sendDataOverSerial(&jsonData);
+        sendDataOverSerial(jsonData);
 
         lastCheckTime = currentMillis;
     }
-    
-}
 
+    String requestFromEsp = Serial.readString();
+    if (requestFromEsp != NULL && requestFromEsp != "")
+    {
+        handleRequest(requestFromEsp);
+    }
+}
