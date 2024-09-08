@@ -61,7 +61,7 @@ void loop()
 
         String correlationId = generateCorrelation("PutDetailPerformance");
 
-        String bodyFormat = "{\"header\": {\"Correlation-Id\": \"%s\"}, { \"param\": { \"deviceId\": \"%s\" }, \"body\": { \"document_name\": \"%s\",   \"payload\": [%s] }\n}";
+        String bodyFormat = "{\"header\": {\"Correlation-Id\": \"%s\"}, { \"param\": { \"deviceId\": \"%s\" }, \"body\": { \"document_name\": \"%s\",   \"payload\": %s }\n}";
         // Get Length
         int length = snprintf(NULL, 0, bodyFormat.c_str(), correlationId.c_str(), getDeviceID(),
                               WiFi.macAddress(), dataToRequest);
