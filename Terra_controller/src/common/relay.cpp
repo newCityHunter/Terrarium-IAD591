@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "common/relay.h"
+#include "sensor/heat_humid.h"
 
 void Relay::setRelayName(const char name[10])
 {
@@ -12,8 +13,8 @@ void Relay::relayControl()
     switch (this->condition.type)
     {
     case HUMIDITY:
-        float humid;
-        if (condition.humidThreshold < humid)
+        extern HeatHumid heathumid;
+        if (condition.humidThreshold < heathumid.humidity)
             closeRelay();
         else
             openRelay();

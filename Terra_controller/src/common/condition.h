@@ -20,8 +20,8 @@ struct Condition
     float humidThreshold;
     float temperatureThreshold;
     float moistureThreshold;
-    int duration; //Minutes
-    int startTime; //24hour HHMM format
+    unsigned long duration; //Minutes
+    unsigned long startTime; //24hour HHMM format
 };
 
 
